@@ -1,0 +1,38 @@
+--- JPsi fit setup of the code ---
+
+1) setup the MLFit core code:
+
+setenv CVSROOT :ext:isscvs.cern.ch:/local/reps/StaTTooLLHC
+setenv CVS_RSH ssh
+cvs co MLFit
+
+2) set up ROOT
+
+3) compile MLFit
+cd MLFit
+make
+cd ..
+
+4) setup JPsi MLFit code
+project CMSSW
+cvs co -d JPsiMLFit UserCode/emanuele/JPsiMLFit
+
+5) go in the MLFit workdir and copy the datasets
+cd JPsiMLFit
+cp <yourdatasets*>.root datasets
+
+
+--- some macros ---
+this is the analysis. This varies with time
+
+* parameterize the JPsi:
+> root -l src/RooLogon.C
+> .L src/FitJPsiElectrons.cc
+> FitJPsiElectrons() 
+> PlotJPsiElectrons(101) // i.e. do the plot 101 bins in the invmass
+
+* toy MC:
+> root -l src/RooLogon.C
+> .L src/GenerateJPsi.cc
+> Generate(1000) // i.e. generate 1000 toy MC experiments
+
